@@ -1,0 +1,655 @@
+{
+	"info": {
+		"_postman_id": "29e8a0e2-1478-4279-badc-50c7ce446ea4",
+		"name": "trailer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Trailers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"pm.test(\"Checking Vin number Include(or not) String\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.vin).to.eql.toString;",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"content\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": {}",
+							"    },",
+							"    \"pageable\": {",
+							"      \"type\": \"object\",",
+							"      \"properties\": {",
+							"        \"sort\": {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"sorted\": {",
+							"              \"type\": \"boolean\"",
+							"            },",
+							"            \"unsorted\": {",
+							"              \"type\": \"boolean\"",
+							"            },",
+							"            \"empty\": {",
+							"              \"type\": \"boolean\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"sorted\",",
+							"            \"unsorted\",",
+							"            \"empty\"",
+							"          ]",
+							"        },",
+							"        \"offset\": {",
+							"          \"type\": \"integer\"",
+							"        },",
+							"        \"pageNumber\": {",
+							"          \"type\": \"integer\"",
+							"        },",
+							"        \"pageSize\": {",
+							"          \"type\": \"integer\"",
+							"        },",
+							"        \"paged\": {",
+							"          \"type\": \"boolean\"",
+							"        },",
+							"        \"unpaged\": {",
+							"          \"type\": \"boolean\"",
+							"        }",
+							"      },",
+							"      \"required\": [",
+							"        \"sort\",",
+							"        \"offset\",",
+							"        \"pageNumber\",",
+							"        \"pageSize\",",
+							"        \"paged\",",
+							"        \"unpaged\"",
+							"      ]",
+							"    },",
+							"    \"totalPages\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"totalElements\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"last\": {",
+							"      \"type\": \"boolean\"",
+							"    },",
+							"    \"size\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"number\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"sort\": {",
+							"      \"type\": \"object\",",
+							"      \"properties\": {",
+							"        \"sorted\": {",
+							"          \"type\": \"boolean\"",
+							"        },",
+							"        \"unsorted\": {",
+							"          \"type\": \"boolean\"",
+							"        },",
+							"        \"empty\": {",
+							"          \"type\": \"boolean\"",
+							"        }",
+							"      },",
+							"      \"required\": [",
+							"        \"sorted\",",
+							"        \"unsorted\",",
+							"        \"empty\"",
+							"      ]",
+							"    },",
+							"    \"numberOfElements\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"first\": {",
+							"      \"type\": \"boolean\"",
+							"    },",
+							"    \"empty\": {",
+							"      \"type\": \"boolean\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"content\",",
+							"    \"pageable\",",
+							"    \"totalPages\",",
+							"    \"totalElements\",",
+							"    \"last\",",
+							"    \"size\",",
+							"    \"number\",",
+							"    \"sort\",",
+							"    \"numberOfElements\",",
+							"    \"first\",",
+							"    \"empty\"",
+							"  ]",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, 123];",
+							"",
+							"pm.test('Integration Testing', function () {",
+							"    var result = tv4.validateResult(pm.response.json(), schema);",
+							"    if(!result.valid){",
+							"        console.log(result)",
+							"    }",
+							"    pm.expect(result.valid).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{TrailersRel}}/trailers/",
+					"host": [
+						"{{TrailersRel}}"
+					],
+					"path": [
+						"trailers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Trailer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json()",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"pm.test(\"Checking ID is equal to response ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(response.id);",
+							"});",
+							"",
+							"pm.environment.set(\"TrailersId\", response.id);",
+							"",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"id\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"companyId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"vin\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"      \"type\": \"object\",",
+							"      \"properties\": {",
+							"        \"latitude\": {",
+							"          \"type\": \"string\"",
+							"        },",
+							"        \"longitude\": {",
+							"          \"type\": \"string\"",
+							"        }",
+							"      },",
+							"      \"required\": [",
+							"        \"latitude\",",
+							"        \"longitude\"",
+							"      ]",
+							"    },",
+							"    \"driverId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"ownerType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"notes\": {",
+							"      \"type\": \"null\"",
+							"    },",
+							"    \"assigned\": {",
+							"      \"type\": \"boolean\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"id\",",
+							"    \"companyId\",",
+							"    \"vin\",",
+							"    \"location\",",
+							"    \"driverId\",",
+							"    \"ownerType\",",
+							"    \"notes\",",
+							"    \"assigned\"",
+							"  ]",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, 123];",
+							"",
+							"pm.test('Integration Test', function () {",
+							"    var result = tv4.validateResult(pm.response.json(), schema);",
+							"    if(!result.valid){",
+							"        console.log(result)",
+							"    }",
+							"    pm.expect(result.valid).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\": \"kbasndfj\",\n    \"vin\": \"asmrycbdgleo12s8c\",\n    \"isAssigned\": true,\n    \"location\": {\n        \"latitude\": \"jhbm\",\n        \"longitude\": \"sda\"\n    },\n    \"driverId\": \"ksdjnfk\",\n    \"ownerType\": \"PERSONAL\",\n    \"notes\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{TrailersRel}}/trailers/",
+					"host": [
+						"{{TrailersRel}}"
+					],
+					"path": [
+						"trailers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Trailer By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Transfer-encoding is present\", function () {",
+							"    pm.response.to.have.header(\"transfer-encoding\");",
+							"});",
+							"",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"id\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"companyId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"vin\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"      \"type\": \"object\",",
+							"      \"properties\": {",
+							"        \"latitude\": {",
+							"          \"type\": \"string\"",
+							"        },",
+							"        \"longitude\": {",
+							"          \"type\": \"string\"",
+							"        }",
+							"      },",
+							"      \"required\": [",
+							"        \"latitude\",",
+							"        \"longitude\"",
+							"      ]",
+							"    },",
+							"    \"driverId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"ownerType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"notes\": {",
+							"      \"type\": \"null\"",
+							"    },",
+							"    \"assigned\": {",
+							"      \"type\": \"boolean\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"id\",",
+							"    \"companyId\",",
+							"    \"vin\",",
+							"    \"location\",",
+							"    \"driverId\",",
+							"    \"ownerType\",",
+							"    \"notes\",",
+							"    \"assigned\"",
+							"  ]",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, 123];",
+							"",
+							"pm.test('Validating', function () {",
+							"    var result = tv4.validateResult(pm.response.json(), schema);",
+							"    if(!result.valid){",
+							"        console.log(result)",
+							"    }    ",
+							"    pm.expect(result.valid).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{TrailersRel}}/trailers/{{TrailersId}}",
+					"host": [
+						"{{TrailersRel}}"
+					],
+					"path": [
+						"trailers",
+						"{{TrailersId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Trailer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Vin number is String\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.vin).to.eql.toString;",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"id\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"companyId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"vin\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"      \"type\": \"object\",",
+							"      \"properties\": {",
+							"        \"latitude\": {",
+							"          \"type\": \"string\"",
+							"        },",
+							"        \"longitude\": {",
+							"          \"type\": \"string\"",
+							"        }",
+							"      },",
+							"      \"required\": [",
+							"        \"latitude\",",
+							"        \"longitude\"",
+							"      ]",
+							"    },",
+							"    \"driverId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"ownerType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"notes\": {",
+							"      \"type\": \"null\"",
+							"    },",
+							"    \"assigned\": {",
+							"      \"type\": \"boolean\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"id\",",
+							"    \"companyId\",",
+							"    \"vin\",",
+							"    \"location\",",
+							"    \"driverId\",",
+							"    \"ownerType\",",
+							"    \"notes\",",
+							"    \"assigned\"",
+							"  ]",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, 123];",
+							"",
+							"pm.test('Integration Test', function () {",
+							"    var result = tv4.validateResult(pm.response.json(), schema)",
+							"    if(!result.valid){",
+							"        console.log(result)",
+							"    }",
+							"    pm.expect(result.valid).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyId\": \"kbasndfj\",\n    \"vin\": \"hfgtrilertdbc345w\",\n    \"isAssigned\": true,\n    \"location\": {\n        \"latitude\": \"jhbm\",\n        \"longitude\": \"sda\"\n    },\n    \"driverId\": \"ksdjnfk\",\n    \"ownerType\": \"PERSONAL\",\n    \"notes\": null\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{TrailersRel}}/trailers/{{TrailersId}}",
+					"host": [
+						"{{TrailersRel}}"
+					],
+					"path": [
+						"trailers",
+						"{{TrailersId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Is Assigned",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.companyId).to.eql.toString;",
+							"});",
+							"",
+							"pm.test(\"Date is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"id\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"companyId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"vin\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"      \"type\": \"object\",",
+							"      \"properties\": {",
+							"        \"latitude\": {",
+							"          \"type\": \"string\"",
+							"        },",
+							"        \"longitude\": {",
+							"          \"type\": \"string\"",
+							"        }",
+							"      },",
+							"      \"required\": [",
+							"        \"latitude\",",
+							"        \"longitude\"",
+							"      ]",
+							"    },",
+							"    \"driverId\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"ownerType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"notes\": {",
+							"      \"type\": \"null\"",
+							"    },",
+							"    \"assigned\": {",
+							"      \"type\": \"boolean\"",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"id\",",
+							"    \"companyId\",",
+							"    \"vin\",",
+							"    \"location\",",
+							"    \"driverId\",",
+							"    \"ownerType\",",
+							"    \"notes\",",
+							"    \"assigned\"",
+							"  ]",
+							"};",
+							"",
+							"var data1 = [true, false];",
+							"var data2 = [true, 123];",
+							"",
+							"pm.test('Integration Test', function () {",
+							"    var result = tv4.validateResult(pm.response.json(), schema)",
+							"    if(!result.validate){",
+							"        console.log(result)",
+							"    }",
+							"    pm.expect(result.valid).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"isAssigned\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{TrailersRel}}/trailers/{{TrailersId}}",
+					"host": [
+						"{{TrailersRel}}"
+					],
+					"path": [
+						"trailers",
+						"{{TrailersId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Trailer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{TrailersRel}}/trailers/{{TrailersId}}",
+					"host": [
+						"{{TrailersRel}}"
+					],
+					"path": [
+						"trailers",
+						"{{TrailersId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
