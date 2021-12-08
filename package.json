@@ -6,10 +6,10 @@
     "test": "tests"
   },
   "scripts": {
-    "newman" : "npm install -g newman-reporter-htmlextra",
-    "api-jma-action-history-release": "newman run TTA/JMA-ACTION-HISTORY.postman_collection.json -e 'Truck_Trailer.postman_environment.json' -r htmlextra",
-    "api-jma-trailers-release": "newman run TTA/trailer.postman_collection.json -e 'Truck_Trailer.postman_environment.json' -r htmlextra",
-    "api-jma-trucks-release": "newman run TTA/trucks.postman_collection.json -e 'Truck_Trailer.postman_environment.json' -r htmlextra"
+    "newman" : "npm install -g newman-reporter-html",
+    "api-jma-action-history-release": "newman run TTA/JMA-ACTION-HISTORY.postman_collection.json -e 'Truck_Trailer.postman_environment.json' -r html",
+    "api-jma-trailers-release": "newman run TTA/trailer.postman_collection.json -e 'Truck_Trailer.postman_environment.json' -r html",
+    "api-jma-trucks-release": "newman run TTA/trucks.postman_collection.json -e 'Truck_Trailer.postman_environment.json' -r html"
   },
   "author": "MamurjonUzokov",
   "dependencies": {
